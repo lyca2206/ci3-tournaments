@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bracket Management</title>
+  <style>
+    @import url(https://fonts.googleapis.com/css?family=Roboto:300);
+
+    body {
+      font-family: "Roboto", sans-serif;
+      background-color: #f4f4f9;
+      padding: 20px;
+    }
+
+    h1 {
+      color: #4CAF50;
+      text-align: center;
+    }
+
+    .form {
+      background: #ffffff;
+      padding: 20px;
+      margin-bottom: 20px;
+      box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.1);
+      border-radius: 8px;
+    }
+
+    .form input, .form button {
+      display: block;
+      width: 100%;
+      margin-bottom: 10px;
+      padding: 10px;
+      border-radius: 5px;
+      font-size: 14px;
+    }
+
+    .form input {
+      background-color: #f2f2f2;
+      border: none;
+      outline: none;
+    }
+
+    .form button {
+      background-color: #4CAF50;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+      text-transform: uppercase;
+    }
+
+    .form button:hover {
+      background-color: #43A047;
+    }
+
+    .bracket-round {
+      display: flex;
+      justify-content: space-between;
+      margin: 20px 0;
+    }
+
+    .matchup {
+      background-color: #ffffff;
+      padding: 10px;
+      border-radius: 5px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      width: 45%;
+      text-align: center;
+    }
+
+    .winner {
+      font-weight: bold;
+      color: #4CAF50;
+    }
+
+    .matchup span {
+      display: block;
+      margin: 10px 0;
+    }
+
+  </style>
+</head>
+<body>
+
+  <h1>Bracket Management</h1>
+
+  <!-- CREATE BRACKET FORM -->
+  <div class="form">
+    <h2>Create Bracket</h2>
+    <input type="text" id="bracketName" placeholder="Bracket Name">
+    <input type="number" id="numTeams" placeholder="Number of Teams (must be power of 2)">
+    <button onclick="createBracket()">Create Bracket</button>
+  </div>
+
+  <!-- BRACKET DISPLAY -->
+  <div id="bracketDisplay" style="display: none;">
+    <h2>Bracket</h2>
+    <div id="bracketContainer">
+      <!-- Bracket structure will go here -->
+    </div>
+  </div>
+
+  <script>
+    let teams = [];
+    let bracketName = '';
+
+    // CREATE_BRACKET
+    function createBracket() {
+      bracketName = document.getElementById('bracketName').value;
+      const numTeams = parseInt(document.getElementById('numTeams').value);
+
+      if (!isPowerOfTwo(numTeams)) {
+        alert('Number of teams must be a power of 2 (e.g., 4, 8, 16, etc.)');
+        return;
+      }
+
+      // Generate random teams
+      teams = generateTeams(numTeams);
+
+      // Display the bracket
+      displayBracket(teams);
+    }
+
+    // Helper function to check if number is a power of 2
+    function isPowerOfTwo(num) {
+      return (num & (num - 1)) === 0;
+    }
+
+    // Helper function to generate random teams
+    function generateTeams(num) {
+      const teamArray = [];
+      for (let i = 1; i <= num; i++) {
+        teamArray.push(`Team ${i}`);
+      }
+
+      // Shuffle teams randomly
+      return teamArray.sort(() => Math.random() - 0.5);
+    }
+
+    // DISPLAY BRACKET
+    function displayBracket(teams) {
+      const bracketContainer = document.getElementById('bracketContainer');
+      bracketContainer.innerHTML = ''; // Clear previous bracket if any
+
+      let round = 1;
+      let currentTeams = teams;
+
+      while (currentTeams.length > 1) {
+        const roundMatches = createRound(currentTeams);
+        bracketContainer.innerHTML += `<div class="bracket-round"><h3>Round ${round}</h3></div>`;
+        const roundDiv = bracketContainer.lastChild;
+
+        // Display matchups for this round
+        roundMatches.forEach(match => {
+          const matchDiv = document.createElement('div');
+          matchDiv.classList.add('matchup');
+          matchDiv.innerHTML = `
+            <span>${match.team1}</span>
+            <span>VS</span>
+            <span>${match.team2}</span>
+            <div class="winner">Winner: ${match.winner}</div>
+          `;
+          roundDiv.appendChild(matchDiv);
+        });
+
+        // Advance winners to the next round
+        currentTeams = roundMatches.map(match => match.winner);
+        round++;
+      }
+
+      document.getElementById('bracketDisplay').style.display = 'block';
+    }
+
+    // Simulate a round, returns an array of matchups
+    function createRound(teams) {
+      const roundMatches = [];
+
+      for (let i = 0; i < teams.length; i += 2) {
+        const team1 = teams[i];
+        const team2 = teams[i + 1];
+
+        // Simulate winner randomly
+        const winner = Math.random() > 0.5 ? team1 : team2;
+
+        roundMatches.push({ team1, team2, winner });
+      }
+
+      return roundMatches;
+    }
+
+  </script>
+
+</body>
+</html>

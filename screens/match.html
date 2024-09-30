@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Match Management</title>
+  <style>
+    /* Estilos generales */
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f2f2f2;
+      margin: 0;
+      padding: 0;
+    }
+
+    h1 {
+      text-align: center;
+      color: #333;
+      margin-top: 20px;
+    }
+
+    .container {
+      display: flex;
+      justify-content: center;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 20px;
+    }
+
+    /* Botones de acciones */
+    .match-actions {
+      background-color: #ffffff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+      margin-bottom: 20px;
+    }
+
+    button {
+      background-color: #4CAF50;
+      color: white;
+      padding: 10px 20px;
+      margin: 5px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    button:disabled {
+      background-color: #ccc;
+      cursor: not-allowed;
+    }
+
+    button:hover:not(:disabled) {
+      background-color: #45a049;
+    }
+
+    /* Formulario de creación de matches */
+    #match-form {
+      background-color: #ffffff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    input[type="text"], input[type="number"] {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      box-sizing: border-box;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    /* Lista de partidos */
+    #match-list {
+      background-color: #ffffff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    ul li {
+      background-color: #e9e9e9;
+      margin: 10px 0;
+      padding: 10px;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    ul li:hover {
+      background-color: #d4d4d4;
+    }
+
+    ul li.selected {
+      background-color: #b3d9ff;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Match Management</h1>
+
+  <div class="container">
+    <!-- Acciones para crear, actualizar y eliminar partidos -->
+    <div class="match-actions">
+      <h2>Actions</h2>
+      <button id="create-match">Create Match</button>
+      <button id="update-match" disabled>Update Match</button>
+      <button id="soft-delete-match" disabled>Soft Delete Match</button>
+    </div>
+
+    <!-- Formulario para crear o actualizar partidos -->
+    <div id="match-form" style="display: none;">
+      <h2>Create Match</h2>
+      <form id="match-form-data">
+        <label for="team1">Team 1:</label>
+        <input type="text" id="team1" name="team1" required>
+        <label for="team2">Team 2:</label>
+        <input type="text" id="team2" name="team2" required>
+        <label for="score1">Team 1 Score:</label>
+        <input type="number" id="score1" name="score1" required>
+        <label for="score2">Team 2 Score:</label>
+        <input type="number" id="score2" name="score2" required>
+        <button type="submit">Create</button>
+      </form>
+    </div>
+
+    <!-- Lista de partidos creados -->
+    <div id="match-list">
+      <h2>Matches</h2>
+      <ul id="matches-list">
+        <!-- Los partidos aparecerán aquí -->
+      </ul>
+    </div>
+  </div>
+
+  <script>
+    let selectedMatchIndex = null;
+    const matches = [];
+
+    // Mostrar formulario de creación
+    document.getElementById('create-match').addEventListener('click', function() {
+      document.getElementById('match-form').style.display = 'block';
+      document.getElementById('match-form-data').reset();
+      selectedMatchIndex = null;
+    });
+
+    // Crear o actualizar un partido
+    document.getElementById('match-form-data').addEventListener('submit', function(event) {
+      event.preventDefault();
+      const team1 = document.getElementById('team1').value;
+      const team2 = document.getElementById('team2').value;
+      const score1 = document.getElementById('score1').value;
+      const score2 = document.getElementById('score2').value;
+
+      const matchData = { team1, team2, score1, score2 };
+
+      // Agregar o actualizar partido
+      if (selectedMatchIndex === null) {
+        matches.push(matchData);
+      } else {
+        matches[selectedMatchIndex] = matchData;
+      }
+
+      renderMatches();
+      document.getElementById('match-form').style.display = 'none';
+    });
+
+    // Actualizar el estado de los botones
+    document.getElementById('update-match').addEventListener('click', function() {
+      if (selectedMatchIndex !== null) {
+        const match = matches[selectedMatchIndex];
+        document.getElementById('team1').value = match.team1;
+        document.getElementById('team2').value = match.team2;
+        document.getElementById('score1').value = match.score1;
+        document.getElementById('score2').value = match.score2;
+        document.getElementById('match-form').style.display = 'block';
+      }
+    });
+
+    document.getElementById('soft-delete-match').addEventListener('click', function() {
+      if (selectedMatchIndex !== null) {
+        matches.splice(selectedMatchIndex, 1);
+        selectedMatchIndex = null;
+        renderMatches();
+      }
+    });
+
+    // Renderizar la lista de partidos
+    function renderMatches() {
+      const matchesList = document.getElementById('matches-list');
+      matchesList.innerHTML = '';
+
+      matches.forEach((match, index) => {
+        const li = document.createElement('li');
+        li.textContent = `${match.team1} (${match.score1}) vs ${match.team2} (${match.score2})`;
+        li.addEventListener('click', function() {
+          selectedMatchIndex = index;
+          updateActionButtons();
+          highlightSelectedMatch();
+        });
+
+        matchesList.appendChild(li);
+      });
+
+      updateActionButtons();
+    }
+
+    function updateActionButtons() {
+      document.getElementById('update-match').disabled = selectedMatchIndex === null;
+      document.getElementById('soft-delete-match').disabled = selectedMatchIndex === null;
+    }
+
+    function highlightSelectedMatch() {
+      const listItems = document.querySelectorAll('#matches-list li');
+      listItems.forEach((item, index) => {
+        if (index === selectedMatchIndex) {
+          item.classList.add('selected');
+        } else {
+          item.classList.remove('selected');
+        }
+      });
+    }
+  </script>
+
+</body>
+</html>

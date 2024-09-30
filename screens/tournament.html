@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tournament Management</title>
+  <style>
+    @import url(https://fonts.googleapis.com/css?family=Roboto:300);
+
+    body {
+      font-family: "Roboto", sans-serif;
+      background-color: #f4f4f9;
+      padding: 20px;
+    }
+
+    h1 {
+      color: #4CAF50;
+      text-align: center;
+    }
+
+    .form {
+      background: #ffffff;
+      padding: 20px;
+      margin-bottom: 20px;
+      box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.1);
+      border-radius: 8px;
+    }
+
+    .form input, .form button {
+      display: block;
+      width: 100%;
+      margin-bottom: 10px;
+      padding: 10px;
+      border-radius: 5px;
+      font-size: 14px;
+    }
+
+    .form input {
+      background-color: #f2f2f2;
+      border: none;
+      outline: none;
+    }
+
+    .form button {
+      background-color: #4CAF50;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+      text-transform: uppercase;
+    }
+
+    .form button:hover {
+      background-color: #43A047;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    table, th, td {
+      border: 1px solid #ddd;
+    }
+
+    th, td {
+      padding: 15px;
+      text-align: left;
+    }
+
+    th {
+      background-color: #4CAF50;
+      color: white;
+    }
+
+    .actions button {
+      background-color: #4CAF50;
+      color: #fff;
+      border: none;
+      padding: 10px;
+      cursor: pointer;
+      margin-right: 5px;
+    }
+
+    .actions button.update {
+      background-color: #FFC107;
+    }
+
+    .actions button.delete {
+      background-color: #F44336;
+    }
+
+    .actions button:hover {
+      opacity: 0.8;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Tournament Management</h1>
+
+  <!-- CREATE TOURNAMENT FORM -->
+  <div class="form">
+    <h2>Create Tournament</h2>
+    <input type="text" id="tournamentName" placeholder="Tournament Name">
+    <input type="text" id="location" placeholder="Location">
+    <input type="date" id="startDate" placeholder="Start Date">
+    <button onclick="createTournament()">Create Tournament</button>
+  </div>
+
+  <!-- TOURNAMENTS LIST -->
+  <div class="form">
+    <h2>All Tournaments</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Location</th>
+          <th>Start Date</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody id="tournamentList">
+        <!-- List of tournaments will go here -->
+      </tbody>
+    </table>
+  </div>
+
+  <!-- UPDATE TOURNAMENT FORM -->
+  <div class="form">
+    <h2>Update Tournament</h2>
+    <input type="hidden" id="updateTournamentId">
+    <input type="text" id="updateTournamentName" placeholder="Tournament Name">
+    <input type="text" id="updateLocation" placeholder="Location">
+    <input type="date" id="updateStartDate" placeholder="Start Date">
+    <button onclick="updateTournament()">Update Tournament</button>
+  </div>
+
+  <script>
+    // CREATE_TOURNAMENT
+    function createTournament() {
+      const name = document.getElementById('tournamentName').value;
+      const location = document.getElementById('location').value;
+      const startDate = document.getElementById('startDate').value;
+
+      // Simulate sending data to backend (replace with actual API call)
+      console.log(`Creating tournament: ${name}, ${location}, ${startDate}`);
+
+      // Add to the tournament list
+      const newRow = document.createElement('tr');
+      newRow.innerHTML = `
+        <td>1</td>
+        <td>${name}</td>
+        <td>${location}</td>
+        <td>${startDate}</td>
+        <td class="actions">
+          <button class="update" onclick="editTournament(1, '${name}', '${location}', '${startDate}')">Update</button>
+          <button class="delete" onclick="softDeleteTournament(1)">Delete</button>
+        </td>
+      `;
+      document.getElementById('tournamentList').appendChild(newRow);
+    }
+
+    // GET_ALL_TOURNAMENTS (simulation)
+    function getAllTournaments() {
+      // This function should populate the tournamentList table with data from the backend
+    }
+
+    // UPDATE_TOURNAMENT
+    function updateTournament() {
+      const id = document.getElementById('updateTournamentId').value;
+      const name = document.getElementById('updateTournamentName').value;
+      const location = document.getElementById('updateLocation').value;
+      const startDate = document.getElementById('updateStartDate').value;
+
+      // Simulate updating a tournament (replace with actual API call)
+      console.log(`Updating tournament ${id}: ${name}, ${location}, ${startDate}`);
+    }
+
+    // SOFT_DELETE_TOURNAMENT
+    function softDeleteTournament(id) {
+      // Simulate soft delete (replace with actual API call)
+      console.log(`Soft deleting tournament with ID: ${id}`);
+    }
+
+    // EDIT TOURNAMENT (Fill form for update)
+    function editTournament(id, name, location, startDate) {
+      document.getElementById('updateTournamentId').value = id;
+      document.getElementById('updateTournamentName').value = name;
+      document.getElementById('updateLocation').value = location;
+      document.getElementById('updateStartDate').value = startDate;
+    }
+
+    // Simulate fetching tournaments when page loads
+    document.addEventListener('DOMContentLoaded', getAllTournaments);
+  </script>
+
+</body>
+</html>
