@@ -31,6 +31,15 @@ CREATE USER place_user_here WITH PASSWORD 'place_password_here';
 CREATE DATABASE database_name;
 ```
 
+Finally, set the following variables in the .env:
+```bash
+DB_HOST='here_goes_a_variable'
+DB_PORT='here_goes_a_variable'
+DB_USERNAME='here_goes_a_variable'
+DB_PASSWORD='here_goes_a_variable'
+DB_NAME='here_goes_a_variable'
+```
+
 ## Compile and run the project
 
 ```bash
