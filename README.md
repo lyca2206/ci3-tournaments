@@ -27,7 +27,7 @@ $ psql -U postgres
 And then create the user and the needed database:
 
 ```SQL
-CREATE USER place_user_here WITH PASSWORD 'place_password_here';
+CREATE USER place_user_here WITH SUPERUSER PASSWORD 'place_password_here';
 CREATE DATABASE database_name;
 ```
 
@@ -38,6 +38,8 @@ DB_PORT='here_goes_a_variable'
 DB_USERNAME='here_goes_a_variable'
 DB_PASSWORD='here_goes_a_variable'
 DB_NAME='here_goes_a_variable'
+JWT_SECRET="here_goes_a_variable"
+JWT_EXPIRATION="here_goes_a_variable (32s|8m|2h)"
 ```
 
 ## Compile and run the project

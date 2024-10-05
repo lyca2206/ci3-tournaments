@@ -1,7 +1,8 @@
 import { Group } from "src/group/entities/group.entity";
 import { Tournament } from "src/tournament/entities/tournament.entity";
-import { ManyToMany, ManyToOne, OneToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Entity, ManyToMany, ManyToOne, OneToOne, PrimaryGeneratedColumn } from "typeorm";
 
+@Entity('match')
 export class Match {
     @PrimaryGeneratedColumn('uuid')
     id: string
