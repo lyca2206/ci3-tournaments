@@ -13,18 +13,18 @@ export class UserController {
     @Post("/signup")
     createUser(@Body() createUserDTO: CreateUserDTO) { return this.userService.createUser(createUserDTO) }
 
-    @Post("signin")
+    @Post("/signin")
     authenticate(@Body() userDTO: UserDTO) { return this.userService.authenticate(userDTO) }
 
     @UseGuards(AuthGuard('jwt'))
-    @Get(':id')
+    @Get('/:id')
     getUserByID(id: string) { this.userService.getUserByID(id) }
 
     @UseGuards(AuthGuard('jwt'))
-    @Put(':id')
+    @Put('/:id')
     updateUser(id: string, @Body() userDTO: UserDTO) { return this.userService.updateUser(id, userDTO) }
 
     @UseGuards(AuthGuard('jwt'))
-    @Delete(':id')
+    @Delete('/:id')
     softDeleteUser(id: string) { return this.userService.softDeleteUser(id) }
 }

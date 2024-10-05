@@ -48,19 +48,13 @@ export class UserService {
     }
 
     async getUserByID(id: string) {
-        try {
-            throw new NotImplementedException
-        } catch (e) {}
+        throw new NotImplementedException
     }
     async updateUser(id: string, userDTO: UserDTO) {
-        try {
-            throw new NotImplementedException
-        } catch (e) {}
+        throw new NotImplementedException
     }
 
     async softDeleteUser(id: string) {
-        try {
-            throw new NotImplementedException
-        } catch (e) {}
+        throw new NotImplementedException
     }
 }
