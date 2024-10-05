@@ -6,9 +6,27 @@ import { GroupModule } from './group/group.module';
 import { TournamentModule } from './tournament/tournament.module';
 import { BracketModule } from './bracket/bracket.module';
 import { MatchModule } from './match/match.module';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { ConfigModule, ConfigService } from '@nestjs/config';
 
 @Module({
-  imports: [UserModule, GroupModule, TournamentModule, BracketModule, MatchModule],
+  imports: [
+    TypeOrmModule.forRootAsync({
+      imports: [ConfigModule.forRoot()],
+      inject: [ConfigService],
+      useFactory: (configService: ConfigService) => ({
+        type: 'postgres',
+        host: configService.get("DB_HOST"),
+        port: configService.get("DB_PORT"),
+        username: configService.get("DB_USERNAME"),
+        password: configService.get("DB_PASSWORD"),
+        database: configService.get("DB_NAME"),
+        entities: ['dist/**/*.entity{.ts, .js}'],
+        autoLoadEntities: true,
+        synchronize: true
+      })
+    }),
+    UserModule, GroupModule, TournamentModule, BracketModule, MatchModule],
   controllers: [AppController],
   providers: [AppService],
 })
