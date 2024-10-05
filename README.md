@@ -15,7 +15,7 @@ $ docker compose up
 Give permissions to the folder called "pgadmin-data":
 
 ```bash
-$ chmod -R 660 pgadmin-data
+$ chmod -R 770 pgadmin-data
 ```
 
 Inside the PostgreSQL database container, execute:
