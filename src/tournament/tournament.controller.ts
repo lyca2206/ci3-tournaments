@@ -1,6 +1,7 @@
-import { Controller, Delete, Get, Post, Put, UseGuards } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Headers, Post, Put, UseGuards } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { TournamentService } from './tournament.service';
+import { TournamentDTO } from './DTO/tournament.dto';
 
 @Controller('tournament')
 export class TournamentController {
@@ -10,7 +11,9 @@ export class TournamentController {
 
     @UseGuards(AuthGuard('jwt'))
     @Post("/create")
-    createTournament() { return this.tournamentService.createTournament() }
+    createTournament(@Headers("authorization") auth: string, @Body() tournamentDTO: TournamentDTO) {
+        return this.tournamentService.createTournament(auth, tournamentDTO)
+    }
 
     @UseGuards(AuthGuard('jwt'))
     @Get("/:id")

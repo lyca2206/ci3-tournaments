@@ -1,4 +1,4 @@
-import { BadRequestException, Injectable, NotFoundException, NotImplementedException, UnauthorizedException } from '@nestjs/common';
+import { BadRequestException, Injectable, NotFoundException, UnauthorizedException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { User } from './entities/user.entity';
 import { Repository } from 'typeorm';
@@ -17,12 +17,7 @@ export class UserService {
     async createUser(createUserDTO: CreateUserDTO) {
         try {
             const {username, password} = createUserDTO
-
-            const user = this.userRepository.create({
-                username,
-                password: bcrypt.hashSync(password, 10)
-            })
-
+            const user = this.userRepository.create({ username, password: bcrypt.hashSync(password, 10) })
             await this.userRepository.save(user)
 
             return {...user, password: "You should memorize it!"}
@@ -44,6 +39,7 @@ export class UserService {
         try {
             const user = await this.findOneByID(id, false)
             if (!user) { throw new NotFoundException }
+
             return user
         } catch (e) { this.handleException(e) }
     }
@@ -80,6 +76,7 @@ export class UserService {
             where: { username },
             select: { id: true, username: true, password: isReturningPassword }
         })
+
         return user
     }
 
@@ -88,6 +85,7 @@ export class UserService {
             where: { id },
             select: { id: true, username: true, password: isReturningPassword }
         })
+
         return user
     }
     
