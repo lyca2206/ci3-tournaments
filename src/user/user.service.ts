@@ -26,10 +26,7 @@ export class UserService {
             await this.userRepository.save(user)
 
             return {...user, password: "You should memorize it!"}
-        } catch (e) {
-            if (e.code === "23505") { throw new BadRequestException("The given username already exists.") }
-            else { throw e }
-        }
+        } catch (e) { this.handleException(e) }
     }
 
     async authenticate(userDTO: UserDTO) {
@@ -48,10 +45,7 @@ export class UserService {
             const user = await this.findOneByID(id, false)
             if (!user) { throw new NotFoundException }
             return user
-        } catch (e) {
-            if (e.code === "22P02") { throw new BadRequestException("The given ID isn't valid.") }
-            else { throw e }
-        }
+        } catch (e) { this.handleException(e) }
     }
 
     async updateUser(id: string, userDTO: UserDTO) {
@@ -69,10 +63,7 @@ export class UserService {
             })
 
             return { id, username }
-        } catch (e) {
-            if (e.code === "23505") { throw new BadRequestException("The given username already exists.") }
-            else { throw e }
-        }
+        } catch (e) { this.handleException(e) }
     }
 
     async softDeleteUser(id: string) {
@@ -98,5 +89,11 @@ export class UserService {
             select: { id: true, username: true, password: isReturningPassword }
         })
         return user
+    }
+    
+    private handleException(e: any) {
+        if (e.code === "23505") { throw new BadRequestException("The given username already exists.") }
+        else if (e.code === "22P02") { throw new BadRequestException("The given ID isn't valid.") }
+        else { throw e }
     }
 }
