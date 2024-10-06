@@ -1,6 +1,6 @@
 import { Group } from "src/group/entities/group.entity";
 import { Tournament } from "src/tournament/entities/tournament.entity";
-import { BeforeInsert, BeforeUpdate, Column, Entity, ManyToMany, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { BeforeInsert, BeforeUpdate, Column, DeleteDateColumn, Entity, ManyToMany, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity('user')
 export class User {
@@ -24,4 +24,7 @@ export class User {
 
     @BeforeUpdate()
     beforeUpdate(): void { this.convertToLowerCase() }
+
+    @DeleteDateColumn()
+    deletedAt?: Date
 }

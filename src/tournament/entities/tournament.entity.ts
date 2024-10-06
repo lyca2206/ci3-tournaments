@@ -1,7 +1,7 @@
 import { Group } from "src/group/entities/group.entity";
 import { Match } from "src/match/entities/match.entity";
 import { User } from "src/user/entities/user.entity";
-import { Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { Column, DeleteDateColumn, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity('tournament')
 export class Tournament {
@@ -22,4 +22,7 @@ export class Tournament {
 
     @OneToMany(() => Group, group => group.tournament)
     groups: Group[]
+
+    @DeleteDateColumn()
+    deletedAt?: Date
 }

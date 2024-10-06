@@ -88,9 +88,6 @@ export class UserService {
     }
 
     async softDeleteUser(id: string) {
-        throw new NotImplementedException
-        
-        /* TODO. DeleteDateColumn!
         const user = await this.userRepository.findOne({
             where: { id },
             select: { id: true, username: true, password: false }
@@ -101,6 +98,5 @@ export class UserService {
         this.userRepository.softDelete({ id })
 
         return user
-        */
     }
 }
