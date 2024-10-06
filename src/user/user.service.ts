@@ -46,17 +46,11 @@ export class UserService {
 
     async updateUser(id: string, userDTO: UserDTO) {
         try {
-            let { username, password } = userDTO
+            let { username } = userDTO
             const user = await this.findOneByID(id, true)
             if (!user) { throw new NotFoundException }
 
-            username = username !== "" ? username : user.username
-            password = password !== "" ? password : user.password
-
-            await this.userRepository.update({ id }, {
-                username: username,
-                password: bcrypt.hashSync(password, 10)
-            })
+            await this.userRepository.update({ id }, { username: username })
 
             return { id, username }
         } catch (e) { this.handleException(e) }
