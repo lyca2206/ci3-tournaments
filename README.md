@@ -32,6 +32,7 @@ CREATE DATABASE database_name;
 ```
 
 Finally, set the following variables in the .env:
+
 ```bash
 DB_HOST='here_goes_a_variable'
 DB_PORT='here_goes_a_variable'
