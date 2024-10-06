@@ -17,15 +17,15 @@ export class UserService {
     async createUser(createUserDTO: CreateUserDTO) {
         try {
             const {username, password} = createUserDTO
-    
+
             const user = this.userRepository.create({
                 username,
                 password: bcrypt.hashSync(password, 10)
             })
-    
+
             await this.userRepository.save(user)
-    
-            return {...user, password: "Do you really think I'd give you the password? You should memorize it!"}
+
+            return {...user, password: "You should memorize it!"}
         } catch (e) {
             if (e.code === "23505") { throw new BadRequestException("The given username already exists.") }
             else { throw e }
@@ -33,29 +33,20 @@ export class UserService {
     }
 
     async authenticate(userDTO: UserDTO) {
-        const {username, password} = userDTO
-
-        const user = await this.userRepository.findOne({
-            where: { username },
-            select: { id: true, username: true, password: true }
-        })
+        const { username, password } = userDTO
+        const user = await this.findOneByUsername(username, true)
 
         if (!user || !bcrypt.compareSync(password, user.password)) {
             throw new UnauthorizedException('Invalid credentials.')
         }
-        
+
         return {...user, token: this.jwtService.sign({ id: user.id, username: user.username })}
     }
 
     async getUserByID(id: string) {
         try {
-            const user = await this.userRepository.findOne({
-                where: { id },
-                select: { id: true, username: true, password: false }
-            })
-    
+            const user = await this.findOneByID(id, false)
             if (!user) { throw new NotFoundException }
-    
             return user
         } catch (e) {
             if (e.code === "22P02") { throw new BadRequestException("The given ID isn't valid.") }
@@ -65,15 +56,12 @@ export class UserService {
 
     async updateUser(id: string, userDTO: UserDTO) {
         try {
-            const user = await this.userRepository.findOne({
-                where: { id },
-                select: { id: true, username: true, password: true }
-            })
-    
+            let { username, password } = userDTO
+            const user = await this.findOneByID(id, true)
             if (!user) { throw new NotFoundException }
 
-            const username = userDTO.username !== "" ? userDTO.username : user.username
-            const password = userDTO.password !== "" ? userDTO.password : user.password
+            username = username !== "" ? username : user.username
+            password = password !== "" ? password : user.password
 
             await this.userRepository.update({ id }, {
                 username: username,
@@ -88,15 +76,27 @@ export class UserService {
     }
 
     async softDeleteUser(id: string) {
-        const user = await this.userRepository.findOne({
-            where: { id },
-            select: { id: true, username: true, password: false }
-        })
-
+        const user = await this.findOneByID(id, false)
         if (!user) { throw new NotFoundException }
 
         this.userRepository.softDelete({ id })
 
+        return user
+    }
+
+    private async findOneByUsername(username: string, isReturningPassword: boolean) {
+        const user = await this.userRepository.findOne({
+            where: { username },
+            select: { id: true, username: true, password: isReturningPassword }
+        })
+        return user
+    }
+
+    private async findOneByID(id: string, isReturningPassword: boolean) {
+        const user = await this.userRepository.findOne({
+            where: { id },
+            select: { id: true, username: true, password: isReturningPassword }
+        })
         return user
     }
 }
