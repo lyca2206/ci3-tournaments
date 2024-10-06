@@ -1,4 +1,4 @@
-import { Injectable, NotImplementedException } from '@nestjs/common';
+import { BadRequestException, Injectable, NotFoundException, NotImplementedException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Tournament } from './entities/tournament.entity';
 import { Repository } from 'typeorm';
@@ -20,16 +20,26 @@ export class TournamentService {
         return { ... tournamentDTO, creator: payload.id }
     }
 
-    async getTournamentByID() {
-        throw new NotImplementedException
+    async getTournamentByID(id: string) {
+        try {
+            const tournament = await this.tournamentRepository.findOne({ where: { id } })
+            if (!tournament) { throw new NotFoundException }
+    
+            return tournament
+        } catch (e) { this.handleException(e) }
     }
 
-    async getTournamentsByCreator() {
-        throw new NotImplementedException
+    async getTournamentsByCreator(id: string) {
+        try {
+            const tournament = await this.tournamentRepository.find({ where: { creator: { id } } })
+            if (!tournament) { throw new NotFoundException }
+    
+            return tournament
+        } catch (e) { this.handleException(e) }
     }
 
     async getAllTournaments() {
-        throw new NotImplementedException
+        return this.tournamentRepository.find()
     }
 
     async initializeSingleEliminationTournament() {
@@ -46,5 +56,10 @@ export class TournamentService {
 
     async softDeleteTournament() {
         throw new NotImplementedException
+    }
+
+    private handleException(e: any) {
+        if (e.code === "22P02") { throw new BadRequestException("The given ID isn't valid.") }
+        else { throw e }
     }
 }
