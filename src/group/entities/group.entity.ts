@@ -1,6 +1,6 @@
-import { Match } from "src/match/entities/match.entity";
-import { Tournament } from "src/tournament/entities/tournament.entity";
-import { User } from "src/user/entities/user.entity";
+import { Match } from "../../match/entities/match.entity";
+import { Tournament } from "../../tournament/entities/tournament.entity";
+import { User } from "../../user/entities/user.entity";
 import { Column, DeleteDateColumn, Entity, ManyToMany, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity('group')

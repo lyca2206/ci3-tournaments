@@ -1,5 +1,5 @@
-import { Group } from "src/group/entities/group.entity";
-import { Tournament } from "src/tournament/entities/tournament.entity";
+import { Group } from "../../group/entities/group.entity";
+import { Tournament } from "../../tournament/entities/tournament.entity";
 import { DeleteDateColumn, Entity, JoinTable, ManyToMany, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity('match')

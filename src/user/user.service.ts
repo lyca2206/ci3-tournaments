@@ -14,16 +14,25 @@ export class UserService {
         private readonly jwtService: JwtService
     ) {}
 
-    async createUser(createUserDTO: CreateUserDTO) {
-        try {
-            const {username, password} = createUserDTO
-            let user = this.userRepository.create({ username, password: bcrypt.hashSync(password, 10) })
-            user = await this.userRepository.save(user)
+async createUser(createUserDTO: CreateUserDTO) {
+    const { username, password } = createUserDTO;
 
-            return {...user, password: "You should memorize it!"}
-        } catch (e) { this.handleException(e) }
+    // Verificar si el usuario ya existe
+    const existingUser = await this.findOneByUsername(username, false);
+    if (existingUser) {
+        throw new BadRequestException('The given username already exists.');
     }
 
+    try {
+        // Crear un nuevo usuario si no existe
+        let user = this.userRepository.create({ username, password: bcrypt.hashSync(password, 10) });
+        user = await this.userRepository.save(user);
+
+        return { ...user, password: "You should memorize it!" };
+    } catch (e) { 
+        this.handleException(e); 
+    }
+}
     async authenticate(userDTO: UserDTO) {
         const { username, password } = userDTO
         const user = await this.findOneByUsername(username, true)
