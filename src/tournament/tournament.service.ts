@@ -44,11 +44,24 @@ export class TournamentService {
         return this.tournamentRepository.find()
     }
 
-    async initializeSingleEliminationTournament() {
-        throw new NotImplementedException
+    async initializeSingleEliminationTournament(id: string) {
+        //TODO. Replace this with the actual Group count method.
+        this.initializeSETStep(id, 1, 1, "", 13)
     }
 
-    async initializeRoundRobinTournament() {
+    private async initializeSETStep(tournamentID: string, seed: number, round: number, nextMatchID: string, attendees: number) {
+        const opponentSeed = (Math.pow(2, round)) + 1 - seed
+        if (opponentSeed > attendees) {
+            //TODO. Assign groups to the next Match, using the nextMatchID.
+        }
+        else {
+            const createdMatchID = await this.matchService.createMatch(tournamentID, nextMatchID)
+            this.initializeSETStep(tournamentID, seed, round + 1, createdMatchID, attendees)
+            this.initializeSETStep(tournamentID, opponentSeed, round + 1, createdMatchID, attendees)
+        }
+    }
+
+    async initializeRoundRobinTournament(id: string) {
         throw new NotImplementedException
     }
 
