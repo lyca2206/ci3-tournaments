@@ -174,15 +174,19 @@ This will run all the integration tests, ensuring that all components interact c
 We aim for a minimum of **80% code coverage** for both unit and integration tests. This helps us maintain high-quality code and catch potential issues early in the development process.
 
 # 🔬 Unit tests
+```bash
 yarn run test
+```
 
 # 🌐 E2E tests
+```bash
 yarn run test:e2e
+```
 
 # 📊 Test coverage
+```bash
 yarn run test:cov
-
-``
+```
 
 ## 📚 API Documentation
 
