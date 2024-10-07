@@ -5,7 +5,7 @@ import { BadRequestException,NotFoundException } from '@nestjs/common';
 import { UserService } from './user.service';
 import { User } from './entities/user.entity';
 import { JwtService } from '@nestjs/jwt';
-
+import { UpdateResult, DeleteResult } from 'typeorm';
 
 describe('UserService', () => {
     let service: UserService;
@@ -20,10 +20,10 @@ describe('UserService', () => {
                     useValue: {
                         create: jest.fn(),
                         save: jest.fn(),
-                        findOne: jest.fn(), // Use findOne instead of findOneByID
+                        findOne: jest.fn(),
                         clear: jest.fn(),
-                        update: jest.fn(),
-                        softDelete: jest.fn(),
+                        update: jest.fn(), // Mock for update method
+                        softDelete: jest.fn(), // Mock for softDelete method
                     },
                 },
                 {
@@ -65,5 +65,44 @@ describe('UserService', () => {
         jest.spyOn(userRepository, 'findOne').mockResolvedValue(existingUser as User);
         
         await expect(service.createUser(existingUser)).rejects.toThrow(BadRequestException);
+    });
+
+    it('should update a user if the user exists', async () => {
+        const id = 'some-uuid';
+        const updatedUserData = { username: 'updatedUser', password: 'newPassword' };
+        
+        const existingUser = { id, username: 'oldUser', password: 'oldPassword' };
+        jest.spyOn(userRepository, 'findOne').mockResolvedValue(existingUser as User);
+        
+        // Mocking the update method to return a mocked UpdateResult
+        const mockUpdateResult: UpdateResult = { generatedMaps: [], raw: {}, affected: 1 };
+        jest.spyOn(userRepository, 'update').mockResolvedValue(mockUpdateResult);
+        
+        const result = await service.updateUser(id, updatedUserData);
+        
+        expect(result).toEqual({ id, username: 'updatedUser' });
+        expect(userRepository.update).toHaveBeenCalledWith({ id }, {
+            username: updatedUserData.username,
+            password: expect.any(String),  // Expecting the hashed password
+        });
+    });
+
+    it('should throw NotFoundException if the user does not exist', async () => {
+        const id = 'some-uuid';
+        const updatedUserData = { username: 'updatedUser', password: 'newPassword' };
+
+        // Simulating that the user does not exist
+        jest.spyOn(userRepository, 'findOne').mockResolvedValue(null);
+        
+        await expect(service.updateUser(id, updatedUserData)).rejects.toThrow(NotFoundException);
+    });
+
+    it('should throw NotFoundException if the user does not exist for soft delete', async () => {
+        const id = 'some-uuid';
+
+        // Simulating that the user does not exist
+        jest.spyOn(userRepository, 'findOne').mockResolvedValue(null);
+        
+        await expect(service.softDeleteUser(id)).rejects.toThrow(NotFoundException);
     });
 });
