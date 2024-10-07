@@ -45,23 +45,18 @@ Welcome to our awesome Tournament Management System! 🎉 This robust backend ap
    docker compose up -d
    ```
 
-4. Set permissions for the pgAdmin data directory:
-   ```bash
-   chmod -R 770 pgadmin-data
-   ```
-
-5. Access the PostgreSQL container:
+4. Access the PostgreSQL container:
    ```bash
    docker exec -it postgres_container_name psql -U postgres
    ```
 
-6. Create the database and user:
+5. Create the database and user:
    ```SQL
    CREATE USER tournament_user WITH SUPERUSER PASSWORD 'your_secure_password';
    CREATE DATABASE tournament_db;
    ```
 
-7. Create a `.env` file in the root directory and add the following variables:
+6. Create a `.env` file in the root directory and add the following variables:
    ```
    DB_HOST='localhost'
    DB_PORT='5432'
