@@ -29,7 +29,7 @@ export class GroupService {
       tournament,
     });
 
-    return this.groupRepository.save(newGroup);
+    return await this.groupRepository.save(newGroup);
   }
 
   // Método para obtener un grupo por su ID
@@ -64,11 +64,11 @@ export class GroupService {
     // Actualizar los campos que se necesiten
     Object.assign(group, updateGroupDto);
 
-    return this.groupRepository.save(group);
+    return await this.groupRepository.save(group);
   }
 
   // Método para eliminar un grupo lógicamente (soft delete)
-  async softDeleteGroup(id: string): Promise<void> {
+  async softDeleteGroup(id: string): Promise<Group> {
     const group = await this.groupRepository.findOne({ where: { id } });
 
     if (!group) {
@@ -76,6 +76,8 @@ export class GroupService {
     }
 
     await this.groupRepository.softDelete(id);
+
+    return group
   }
 
   private handleException(e: any) {
