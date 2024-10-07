@@ -44,13 +44,13 @@ export class UserService {
         } catch (e) { this.handleException(e) }
     }
 
-    async updateUser(id: string, userDTO: UserDTO) {
+    async updateUser(id: string, createUserDTO: CreateUserDTO) {
         try {
-            let { username } = userDTO
+            let { username, password } = createUserDTO
             const user = await this.findOneByID(id, true)
             if (!user) { throw new NotFoundException }
 
-            await this.userRepository.update({ id }, { username: username })
+            await this.userRepository.update({ id }, { username, password: bcrypt.hashSync(password, 10) })
 
             return { id, username }
         } catch (e) { this.handleException(e) }

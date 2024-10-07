@@ -41,7 +41,9 @@ export class TournamentController {
 
     @UseGuards(AuthGuard('jwt'))
     @Put("/:id")
-    updateTournament() { return this.tournamentService.updateTournament() }
+    updateTournament(@Param("id") id: string, @Body() tournamentDTO: TournamentDTO) {
+        return this.tournamentService.updateTournament(id, tournamentDTO)
+    }
 
     @UseGuards(AuthGuard('jwt'))
     @Delete("/:id")

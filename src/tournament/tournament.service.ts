@@ -50,8 +50,15 @@ export class TournamentService {
         throw new NotImplementedException
     }
 
-    async updateTournament() {
-        throw new NotImplementedException
+    async updateTournament(id: string, tournamentDTO: TournamentDTO) {
+        try {
+            const tournament = await this.tournamentRepository.findOne({ where: { id } })
+            if (!tournament) { throw new NotFoundException }
+    
+            await this.tournamentRepository.update({ id }, tournamentDTO)
+
+            return { id, ...tournamentDTO }
+        } catch (e) { this.handleException(e) }
     }
 
     async softDeleteTournament() {
