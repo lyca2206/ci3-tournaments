@@ -1,0 +1,219 @@
+{
+    "clientName": "Thunder Client",
+    "collectionName": "ci3",
+    "collectionId": "35b894d1-ce28-4503-8d31-1fcef7fdfa24",
+    "dateExported": "2024-10-07T06:37:28.816Z",
+    "version": "1.2",
+    "folders": [
+        {
+            "_id": "25225e27-9d0c-486c-b3cb-130ce992119f",
+            "name": "tournament",
+            "containerId": "",
+            "created": "2024-10-07T05:34:01.187Z",
+            "sortNum": 10000
+        },
+        {
+            "_id": "c610e71d-ea04-4e85-85d3-15a21456ff9a",
+            "name": "group",
+            "containerId": "",
+            "created": "2024-10-07T05:34:13.650Z",
+            "sortNum": 20000
+        },
+        {
+            "_id": "3593d1bd-76b3-47c7-a580-4cbf586b85ea",
+            "name": "Users",
+            "containerId": "",
+            "created": "2024-10-07T06:03:02.191Z",
+            "sortNum": 40000
+        }
+    ],
+    "requests": [
+        {
+            "_id": "6a174fb1-5572-49d3-b85f-3ea8fe97f048",
+            "colId": "35b894d1-ce28-4503-8d31-1fcef7fdfa24",
+            "containerId": "25225e27-9d0c-486c-b3cb-130ce992119f",
+            "name": "Create tournament",
+            "url": "localhost:3000/tournament/create",
+            "method": "POST",
+            "sortNum": 20000,
+            "created": "2024-10-07T05:34:24.255Z",
+            "modified": "2024-10-07T06:05:28.440Z",
+            "headers": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"name\": \"Copa yis\",\n  \"description\": \"Yis vs Ariel in CHESS.\"\n}\n",
+                "form": []
+            },
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjUyNjAxY2IwLTZmMzYtNDNjZS1iN2E5LTc2NTk5YTVmM2RiZiIsInVzZXJuYW1lIjoiamVzdXMgZ2FyY2VzIGlpIiwiaWF0IjoxNzI4MjgxMDMyLCJleHAiOjE3MjgyODE2MzJ9.a39MVYQ5LWNkbG1_OqWR4RWbtyOedJp2-Glzs_KImGM"
+            }
+        },
+        {
+            "_id": "eeff3160-947a-42f1-80ee-a9f05e8a0ac2",
+            "colId": "35b894d1-ce28-4503-8d31-1fcef7fdfa24",
+            "containerId": "c610e71d-ea04-4e85-85d3-15a21456ff9a",
+            "name": "Update group",
+            "url": "localhost:3000/group/6e8ab535-0b6e-403f-8ba9-2f53b212d002",
+            "method": "PUT",
+            "sortNum": 30000,
+            "created": "2024-10-07T05:45:05.607Z",
+            "modified": "2024-10-07T06:33:21.299Z",
+            "headers": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"name\": \"Yisus WIN\",\n  \"seeding\": 4\n}",
+                "form": []
+            },
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjUyNjAxY2IwLTZmMzYtNDNjZS1iN2E5LTc2NTk5YTVmM2RiZiIsInVzZXJuYW1lIjoiamVzdXMgZ2FyY2VzIGlpIiwiaWF0IjoxNzI4MjgyMzkxLCJleHAiOjE3MjgyODI5OTF9.tRAyV1RbKMP4ajC7T0EaAgNXsTIOCdrGrdxVZHhcKmk"
+            }
+        },
+        {
+            "_id": "06834214-86e0-4029-939e-2bdf43294cee",
+            "colId": "35b894d1-ce28-4503-8d31-1fcef7fdfa24",
+            "containerId": "25225e27-9d0c-486c-b3cb-130ce992119f",
+            "name": "GetAll tournaments",
+            "url": "localhost:3000/tournament",
+            "method": "GET",
+            "sortNum": 30000,
+            "created": "2024-10-07T06:07:23.751Z",
+            "modified": "2024-10-07T06:35:07.375Z",
+            "headers": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"name\": \"Copa yis\",\n  \"description\": \"Yis vs Ariel in CHESS.\"\n}\n",
+                "form": []
+            },
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjUyNjAxY2IwLTZmMzYtNDNjZS1iN2E5LTc2NTk5YTVmM2RiZiIsInVzZXJuYW1lIjoiamVzdXMgZ2FyY2VzIGlpIiwiaWF0IjoxNzI4MjgyMzkxLCJleHAiOjE3MjgyODI5OTF9.tRAyV1RbKMP4ajC7T0EaAgNXsTIOCdrGrdxVZHhcKmk"
+            }
+        },
+        {
+            "_id": "7315d2ee-cff5-479d-84d6-e04bcac865d3",
+            "colId": "35b894d1-ce28-4503-8d31-1fcef7fdfa24",
+            "containerId": "",
+            "name": "Users Login",
+            "url": "localhost:3000/user/signin",
+            "method": "POST",
+            "sortNum": 40000,
+            "created": "2024-10-07T06:03:20.038Z",
+            "modified": "2024-10-07T06:03:20.038Z",
+            "headers": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"username\": \"Jesus Garces II\",\n  \"password\": \"SecretPass\"\n}\n",
+                "form": []
+            }
+        },
+        {
+            "_id": "8c0c0d78-a2f5-4d90-acc2-bcfc894a31b5",
+            "colId": "35b894d1-ce28-4503-8d31-1fcef7fdfa24",
+            "containerId": "c610e71d-ea04-4e85-85d3-15a21456ff9a",
+            "name": "DELETE Group",
+            "url": "localhost:3000/group/7d63b400-4e46-4dfa-93c8-3095e0d483e3",
+            "method": "DELETE",
+            "sortNum": 40000,
+            "created": "2024-10-07T06:13:56.235Z",
+            "modified": "2024-10-07T06:28:15.040Z",
+            "headers": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjUyNjAxY2IwLTZmMzYtNDNjZS1iN2E5LTc2NTk5YTVmM2RiZiIsInVzZXJuYW1lIjoiamVzdXMgZ2FyY2VzIGlpIiwiaWF0IjoxNzI4MjgyMzkxLCJleHAiOjE3MjgyODI5OTF9.tRAyV1RbKMP4ajC7T0EaAgNXsTIOCdrGrdxVZHhcKmk"
+            }
+        },
+        {
+            "_id": "ebe915e5-64ee-45be-86e7-f587884829eb",
+            "colId": "35b894d1-ce28-4503-8d31-1fcef7fdfa24",
+            "containerId": "c610e71d-ea04-4e85-85d3-15a21456ff9a",
+            "name": "Create Group",
+            "url": "localhost:3000/group/create",
+            "method": "POST",
+            "sortNum": 40000,
+            "created": "2024-10-07T06:29:45.878Z",
+            "modified": "2024-10-07T06:32:50.309Z",
+            "headers": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"name\": \"My Fidarst Group\",\n  \"seeding\": 4,\n  \"tournamentId\": \"eab73083-1139-451c-bd29-c42c4ddb1325\"\n}",
+                "form": []
+            },
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjUyNjAxY2IwLTZmMzYtNDNjZS1iN2E5LTc2NTk5YTVmM2RiZiIsInVzZXJuYW1lIjoiamVzdXMgZ2FyY2VzIGlpIiwiaWF0IjoxNzI4MjgyMzkxLCJleHAiOjE3MjgyODI5OTF9.tRAyV1RbKMP4ajC7T0EaAgNXsTIOCdrGrdxVZHhcKmk"
+            }
+        },
+        {
+            "_id": "fdf5f24f-46cd-4bec-bd46-1143f01e1174",
+            "colId": "35b894d1-ce28-4503-8d31-1fcef7fdfa24",
+            "containerId": "3593d1bd-76b3-47c7-a580-4cbf586b85ea",
+            "name": "Users Gets",
+            "url": "localhost:3000/user",
+            "method": "GET",
+            "sortNum": 50000,
+            "created": "2024-10-07T06:03:36.526Z",
+            "modified": "2024-10-07T06:03:36.526Z",
+            "headers": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjUyNjAxY2IwLTZmMzYtNDNjZS1iN2E5LTc2NTk5YTVmM2RiZiIsInVzZXJuYW1lIjoiamVzdXMgZ2FyY2VzIiwiaWF0IjoxNzI4Mjc4MjE0LCJleHAiOjE3MjgyNzg4MTR9.a3IHsNGSHyQVFPUq40zAwewKBUReE4RrJ701qZ0vqFk"
+            }
+        },
+        {
+            "_id": "53381202-56e0-4a72-bcc2-dbf2f86e2f55",
+            "colId": "35b894d1-ce28-4503-8d31-1fcef7fdfa24",
+            "containerId": "c610e71d-ea04-4e85-85d3-15a21456ff9a",
+            "name": "Get Group By Id",
+            "url": "localhost:3000/group/6e8ab535-0b6e-403f-8ba9-2f53b212d002",
+            "method": "GET",
+            "sortNum": 50000,
+            "created": "2024-10-07T06:27:45.016Z",
+            "modified": "2024-10-07T06:28:29.674Z",
+            "headers": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjUyNjAxY2IwLTZmMzYtNDNjZS1iN2E5LTc2NTk5YTVmM2RiZiIsInVzZXJuYW1lIjoiamVzdXMgZ2FyY2VzIGlpIiwiaWF0IjoxNzI4MjgyMzkxLCJleHAiOjE3MjgyODI5OTF9.tRAyV1RbKMP4ajC7T0EaAgNXsTIOCdrGrdxVZHhcKmk"
+            }
+        },
+        {
+            "_id": "33cc33cb-a6b8-48e3-8364-e357a556162d",
+            "colId": "35b894d1-ce28-4503-8d31-1fcef7fdfa24",
+            "containerId": "3593d1bd-76b3-47c7-a580-4cbf586b85ea",
+            "name": "Users Puts",
+            "url": "localhost:3000/user/52601cb0-6f36-43ce-b7a9-76599a5f3dbf",
+            "method": "PUT",
+            "sortNum": 60000,
+            "created": "2024-10-07T06:03:45.402Z",
+            "modified": "2024-10-07T06:03:45.402Z",
+            "headers": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"username\": \"Jesus Garces II\",\n  \"password\": \"SecretPass\"\n}\n",
+                "form": []
+            },
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjUyNjAxY2IwLTZmMzYtNDNjZS1iN2E5LTc2NTk5YTVmM2RiZiIsInVzZXJuYW1lIjoiamVzdXMgZ2FyY2VzIiwiaWF0IjoxNzI4Mjc4MjE0LCJleHAiOjE3MjgyNzg4MTR9.a3IHsNGSHyQVFPUq40zAwewKBUReE4RrJ701qZ0vqFk"
+            }
+        },
+        {
+            "_id": "d91d3789-407e-41b5-82eb-c4a0207bdff9",
+            "colId": "35b894d1-ce28-4503-8d31-1fcef7fdfa24",
+            "containerId": "c610e71d-ea04-4e85-85d3-15a21456ff9a",
+            "name": "GET_GROUPS_BY_TOURNAMENT_ID",
+            "url": "localhost:3000/group/getByTournamentID/eab73083-1139-451c-bd29-c42c4ddb1325",
+            "method": "GET",
+            "sortNum": 60000,
+            "created": "2024-10-07T06:33:51.225Z",
+            "modified": "2024-10-07T06:35:25.200Z",
+            "headers": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjUyNjAxY2IwLTZmMzYtNDNjZS1iN2E5LTc2NTk5YTVmM2RiZiIsInVzZXJuYW1lIjoiamVzdXMgZ2FyY2VzIGlpIiwiaWF0IjoxNzI4MjgyMzkxLCJleHAiOjE3MjgyODI5OTF9.tRAyV1RbKMP4ajC7T0EaAgNXsTIOCdrGrdxVZHhcKmk"
+            }
+        }
+    ],
+    "ref": "BxnyTyuq1WiJnWO1oVvQzzlbjVMvYVoBoj1fAwkBXIYC7PVTW-N2cQaurQ2LfpH6ZSSXuMubi97IAG3cWVjAsw"
+}

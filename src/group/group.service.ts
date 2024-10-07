@@ -1,4 +1,4 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { BadRequestException, Injectable, NotFoundException, UnauthorizedException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Group } from './entities/group.entity';
 import { Repository } from 'typeorm';
@@ -33,14 +33,13 @@ export class GroupService {
   }
 
   // Método para obtener un grupo por su ID
-  async getGroupByID(id: string): Promise<Group> {
-    const group = await this.groupRepository.findOne({ where: { id }, relations: ['tournament', 'members', 'matches'] });
-    
-    if (!group) {
-      throw new NotFoundException(`Group with ID ${id} not found`);
-    }
+  async getGroupByID(id: string) {
+    try {
+      const group = await this.groupRepository.findOne({ where: { id } });
+      if (!group) { throw new NotFoundException }
 
-    return group;
+      return group
+  } catch (e) { this.handleException(e) }
   }
 
   // Método para obtener todos los grupos de un torneo específico
@@ -77,5 +76,11 @@ export class GroupService {
     }
 
     await this.groupRepository.softDelete(id);
+  }
+
+  private handleException(e: any) {
+    if (e.code === "23505") { throw new BadRequestException("The group is not found.") }
+    else if (e.code === "22P02") { throw new BadRequestException("The given ID isn't valid.") }
+    else { throw e }
   }
 }
