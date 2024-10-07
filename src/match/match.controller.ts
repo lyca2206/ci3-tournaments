@@ -9,8 +9,8 @@ export class MatchController {
     ){}
     @UseGuards(AuthGuard('jwt'))
     @Get("/:id")
-    getMatchByID() {
-        return this.matchService.getMatchByID()
+    getMatchByID(@Param("id") id: string) {
+        return this.matchService.getMatchByID(id)
     }
 
     @UseGuards(AuthGuard('jwt'))
@@ -20,14 +20,8 @@ export class MatchController {
     }
 
     @UseGuards(AuthGuard('jwt'))
-    @Put("/:id")
-    updateMatch() {
-        return this.matchService.updateMatch()
-    }
-
-    @UseGuards(AuthGuard('jwt'))
     @Delete("/:id")
-    softDeleteMatch() {
-        return this.matchService.softDeleteMatch()
+    softDeleteMatch(@Param("id") id: string) {
+        return this.matchService.softDeleteMatch(id)
     }
 }

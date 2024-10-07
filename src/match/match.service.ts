@@ -22,8 +22,13 @@ export class MatchService {
         return match.id
     }
     
-    async getMatchByID() {
-        throw new NotImplementedException
+    async getMatchByID(id: string) {
+        try {
+            const match = await this.matchRepository.findOne({ where: { id } })
+            if (!match) { throw new NotFoundException }
+
+            return match
+        } catch (e) { this.handleException(e) }
     }
 
     async getMatchByTournamentID(id: string) {
@@ -35,12 +40,13 @@ export class MatchService {
         } catch (e) { this.handleException(e) }
     }
 
-    async updateMatch() {
-        throw new NotImplementedException
-    }
+    async softDeleteMatch(id: string) {
+        const match = await this.matchRepository.findOne({ where: { id } })
+        if (!match) { throw new NotFoundException }
 
-    async softDeleteMatch() {
-        throw new NotImplementedException
+        this.matchRepository.softDelete({ id })
+        
+        return match
     }
 
     private handleException(e: any) {
