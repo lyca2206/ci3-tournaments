@@ -1,8 +1,8 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { UserController } from "../../src/user/user.controller";
-import { UserService } from "../../src/user/user.service";
-import { CreateUserDTO } from "../../src/user/DTO/create_user.dto";
-import { UserDTO } from "../../src/user/DTO/user.dto";
+import { UserController } from '../../src/user/user.controller';
+import { UserService } from '../../src/user/user.service';
+import { CreateUserDTO } from '../../src/user/DTO/create_user.dto';
+import { UserDTO } from '../../src/user/DTO/user.dto';
 
 describe('UserController', () => {
   let userController: UserController;
@@ -48,7 +48,10 @@ describe('UserController', () => {
   });
 
   it('should create a user', async () => {
-    const createUserDTO: CreateUserDTO = { username: 'testuser', password: 'password123' };
+    const createUserDTO: CreateUserDTO = {
+      username: 'testuser',
+      password: 'password123',
+    };
     expect(await userController.createUser(createUserDTO)).toEqual({
       id: '1',
       ...createUserDTO,
@@ -72,7 +75,10 @@ describe('UserController', () => {
   });
 
   it('should update a user', async () => {
-    const userDTO: UserDTO = { username: 'updateduser', password: 'newpassword123' };
+    const userDTO: UserDTO = {
+      username: 'updateduser',
+      password: 'newpassword123',
+    };
     expect(await userController.updateUser('1', userDTO)).toEqual({
       id: '1',
       ...userDTO,
