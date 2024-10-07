@@ -45,23 +45,18 @@ Welcome to our awesome Tournament Management System! 🎉 This robust backend ap
    docker compose up -d
    ```
 
-4. Set permissions for the pgAdmin data directory:
-   ```bash
-   chmod -R 770 pgadmin-data
-   ```
-
-5. Access the PostgreSQL container:
+4. Access the PostgreSQL container:
    ```bash
    docker exec -it postgres_container_name psql -U postgres
    ```
 
-6. Create the database and user:
+5. Create the database and user:
    ```SQL
    CREATE USER tournament_user WITH SUPERUSER PASSWORD 'your_secure_password';
    CREATE DATABASE tournament_db;
    ```
 
-7. Create a `.env` file in the root directory and add the following variables:
+6. Create a `.env` file in the root directory and add the following variables:
    ```
    DB_HOST='localhost'
    DB_PORT='5432'
@@ -85,16 +80,106 @@ yarn run start:dev
 yarn run start:prod
 ```
 
-## 🧪 Testing
+📋 Testing in Our Project
+Testing is crucial for ensuring the quality and reliability of our code. In this project, we focus on unit tests and integration tests to validate the functionality of our modules. Below, you'll find details about the tests we've implemented.
+
+Sure! Here’s a README section specifically tailored to include the details of the unit and integration tests we developed for your project, along with explanations and some engaging emojis.
+
+* * *
+
+📋 Testing in Our Project
+=========================
+
+Testing is crucial for ensuring the quality and reliability of our code. In this project, we focus on **unit tests** and **integration tests** to validate the functionality of our modules. Below, you'll find details about the tests we've implemented.
+
+🧪 Unit Tests
+-------------
+
+Unit tests are designed to validate individual components of our application in isolation. Each test case targets a specific function or method, ensuring it behaves as expected.
+
+### Unit Tests Overview 🔍
+
+For each module, we’ve created tests covering the following functionalities:
+
+*   **User Module**:
+    
+    *   **UserService**:
+        *   `createUser`: Tests the user creation process, ensuring it handles valid and invalid input.
+        *   `getUserById`: Validates retrieval of user details by ID.
+        *   `updateUser`: Tests the update functionality, ensuring changes are correctly applied.
+*   **Tournament Module**:
+    
+    *   **TournamentService**:
+        *   `createTournament`: Tests the creation of tournaments, including edge cases.
+        *   `getAllTournaments`: Ensures all tournaments are retrieved successfully.
+        *   `deleteTournament`: Validates proper deletion of a tournament.
+*   **Group Module**:
+    
+    *   **GroupService**:
+        *   `createGroup`: Tests the group creation functionality.
+        *   `getGroupById`: Validates retrieval of a group by ID.
+        *   `deleteGroup`: Tests deletion to ensure the group is removed.
+
+### Running Unit Tests 🛠️
+
+To execute the unit tests, run the following command in your terminal:
 
 ```bash
+npm run test:unit
+```
+
+Ensure that all tests pass successfully before committing any changes!
+
+* * *
+
+⚙️ Integration Tests
+--------------------
+
+Integration tests validate the interactions between different modules and components, ensuring they work together as expected. These tests simulate real-world scenarios to confirm that our application behaves correctly when all pieces are integrated.
+
+### Integration Tests Overview 🌐
+
+Integration tests were developed for the following functionalities:
+
+*   **User Module**:
+    
+    *   Tests for user registration and login, ensuring that the entire authentication flow works seamlessly.
+*   **Tournament Module**:
+    
+    *   Tests for creating and retrieving tournaments, checking that the associated groups and matches are managed correctly.
+*   **Group Module**:
+    
+    *   Tests for creating, updating, and deleting groups, ensuring that changes propagate correctly through the system.
+
+### Running Integration Tests 🔄
+
+To execute the integration tests, use the following command:
+
+```bash
+npm run test:integration
+```
+
+This will run all the integration tests, ensuring that all components interact correctly.
+
+* * *
+
+📈 Coverage Goals
+-----------------
+
+We aim for a minimum of **80% code coverage** for both unit and integration tests. This helps us maintain high-quality code and catch potential issues early in the development process.
+
 # 🔬 Unit tests
+```bash
 yarn run test
+```
 
 # 🌐 E2E tests
+```bash
 yarn run test:e2e
+```
 
 # 📊 Test coverage
+```bash
 yarn run test:cov
 ```
 

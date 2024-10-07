@@ -17,8 +17,8 @@ export class UserService {
     async createUser(createUserDTO: CreateUserDTO) {
         try {
             const {username, password} = createUserDTO
-            const user = this.userRepository.create({ username, password: bcrypt.hashSync(password, 10) })
-            await this.userRepository.save(user)
+            let user = this.userRepository.create({ username, password: bcrypt.hashSync(password, 10) })
+            user = await this.userRepository.save(user)
 
             return {...user, password: "You should memorize it!"}
         } catch (e) { this.handleException(e) }
@@ -32,7 +32,7 @@ export class UserService {
             throw new UnauthorizedException('Invalid credentials.')
         }
 
-        return {...user, token: this.jwtService.sign({ id: user.id, username: user.username })}
+        return {...user, password: "You should memorize it!", token: this.jwtService.sign({ id: user.id, username: user.username })}
     }
 
     async getUserByID(id: string) {
