@@ -1,8 +1,9 @@
-import { IsString, MinLength } from "class-validator";
+import { Transform } from "class-transformer";
+import { IsString } from "class-validator";
 
 export class UserDTO {
     @IsString()
-    @MinLength(3)
+    @Transform(({ value }: { value: string }) => value.toLowerCase())
     username: string
     
     @IsString()

@@ -68,7 +68,7 @@ export class UserService {
     private async findOneByUsername(username: string, isReturningPassword: boolean) {
         const user = await this.userRepository.findOne({
             where: { username },
-            select: { password: isReturningPassword }
+            select: { id: true, username: true, password: isReturningPassword, deletedAt: true }
         })
 
         return user
@@ -77,7 +77,7 @@ export class UserService {
     private async findOneByID(id: string, isReturningPassword: boolean) {
         const user = await this.userRepository.findOne({
             where: { id },
-            select: { password: isReturningPassword }
+            select: { id: true, username: true, password: isReturningPassword, deletedAt: true }
         })
 
         return user
