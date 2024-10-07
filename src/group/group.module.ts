@@ -17,12 +17,12 @@ import { JwtModule } from '@nestjs/jwt';
       imports: [ConfigModule.forRoot()],
       inject: [ConfigService],
       useFactory: (configService: ConfigService) => ({
-        secret: configService.get("JWT_SECRET"),
-        signOptions: { expiresIn: configService.get("JWT_EXPIRATION") }
-      })
-    })
+        secret: configService.get('JWT_SECRET'),
+        signOptions: { expiresIn: configService.get('JWT_EXPIRATION') },
+      }),
+    }),
   ],
   controllers: [GroupController],
-  providers: [GroupService]
+  providers: [GroupService],
 })
 export class GroupModule {}
