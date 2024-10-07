@@ -2,11 +2,13 @@ import { Injectable, NotImplementedException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Match } from './entities/match.entity';
 import { Repository } from 'typeorm';
+import { JwtService } from '@nestjs/jwt';
 
 @Injectable()
 export class MatchService {
     constructor(
-        @InjectRepository(Match) private readonly matchRepository: Repository<Match>
+        @InjectRepository(Match) private readonly matchRepository: Repository<Match>,
+        private readonly jwtService: JwtService
     ) {}
 
     async createMatch() {
