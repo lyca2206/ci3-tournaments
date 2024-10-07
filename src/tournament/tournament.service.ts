@@ -5,11 +5,13 @@ import { Repository } from 'typeorm';
 import { TournamentDTO } from './DTO/tournament.dto';
 import { JwtService } from '@nestjs/jwt';
 import { MatchService } from 'src/match/match.service';
+import { GroupService } from 'src/group/group.service';
 
 @Injectable()
 export class TournamentService {
     constructor(
         private readonly matchService: MatchService,
+        private readonly groupService: GroupService,
         @InjectRepository(Tournament) private readonly tournamentRepository: Repository<Tournament>,
         private readonly jwtService: JwtService
     ) {}
@@ -45,14 +47,15 @@ export class TournamentService {
     }
 
     async initializeSingleEliminationTournament(id: string) {
-        //TODO. Replace this with the actual Group count method.
-        this.initializeSETStep(id, 1, 1, "", 13)
+        const count = await this.groupService.getGroupCount(id)
+        this.initializeSETStep(id, 1, 1, "", count)
     }
 
     private async initializeSETStep(tournamentID: string, seed: number, round: number, nextMatchID: string, attendees: number) {
         const opponentSeed = (Math.pow(2, round)) + 1 - seed
         if (opponentSeed > attendees) {
-            //TODO. Assign groups to the next Match, using the nextMatchID.
+            const group = await this.groupService.getGroupBySeed(tournamentID, seed)
+            this.matchService.addGroup(nextMatchID, group)
         }
         else {
             const createdMatchID = await this.matchService.createMatch(tournamentID, nextMatchID)

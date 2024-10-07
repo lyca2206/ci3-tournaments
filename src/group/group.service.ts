@@ -53,6 +53,27 @@ export class GroupService {
     return tournament.groups;
   }
 
+  // Método para obtener todos los grupos de un torneo específico
+  async getGroupBySeed(tournamentId: string, seeding: number): Promise<Group> {
+    const group = await this.groupRepository.findOne({ where: { seeding, tournament: { id: tournamentId } } });
+    
+    if (!group) {
+      throw new NotFoundException
+    }
+
+    return group
+  }
+
+  async getGroupCount(tournamentId: string): Promise<number> {
+    const count = await this.groupRepository.count({ where: { tournament: { id: tournamentId } } });
+    
+    if (!count) {
+      throw new NotFoundException
+    }
+
+    return count
+  }
+
   // Método para actualizar un grupo
   async updateGroup(id: string, updateGroupDto: UpdateGroupDto): Promise<Group> {
     const group = await this.groupRepository.findOne({ where: { id } });

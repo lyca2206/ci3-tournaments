@@ -5,6 +5,7 @@ export class UpdateGroupDto {
     @Transform(({ value }: { value: string }) => value.toLowerCase())
     @MinLength(3)
     name?: string;
+    
     @IsNumber()
     seeding?: number;
 }
