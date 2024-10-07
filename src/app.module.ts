@@ -23,7 +23,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
         entities: ['dist/**/*.entity{.ts, .js}'],
         autoLoadEntities: true,
         synchronize: true,
-        ssl: true
+        ssl: configService.get("DB_SSL") === "ssl" ? true : false
       })
     }),
     UserModule, GroupModule, TournamentModule, MatchModule],
