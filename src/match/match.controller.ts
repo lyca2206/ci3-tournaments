@@ -7,28 +7,25 @@ export class MatchController {
     constructor(
         private readonly matchService: MatchService
     ){}
-
     @UseGuards(AuthGuard('jwt'))
-    @Post("/create")
-    createMatch() {
-        return this.matchService.createMatch()
-    }
-    
     @Get("/:id")
     getMatchByID() {
         return this.matchService.getMatchByID()
     }
 
+    @UseGuards(AuthGuard('jwt'))
     @Get("/getByTournamentID/:id")
     getMatchByTournamentID() {
         return this.matchService.getMatchByTournamentID()
     }
 
+    @UseGuards(AuthGuard('jwt'))
     @Put("/:id")
     updateMatch() {
         return this.matchService.updateMatch()
     }
 
+    @UseGuards(AuthGuard('jwt'))
     @Delete("/:id")
     softDeleteMatch() {
         return this.matchService.softDeleteMatch()

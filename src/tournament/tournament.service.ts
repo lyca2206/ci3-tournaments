@@ -4,10 +4,12 @@ import { Tournament } from './entities/tournament.entity';
 import { Repository } from 'typeorm';
 import { TournamentDTO } from './DTO/tournament.dto';
 import { JwtService } from '@nestjs/jwt';
+import { MatchService } from 'src/match/match.service';
 
 @Injectable()
 export class TournamentService {
     constructor(
+        private readonly matchService: MatchService,
         @InjectRepository(Tournament) private readonly tournamentRepository: Repository<Tournament>,
         private readonly jwtService: JwtService
     ) {}
