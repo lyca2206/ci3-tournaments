@@ -8,6 +8,7 @@ import { Group } from 'src/group/entities/group.entity';
 import { Match } from 'src/match/entities/match.entity';
 import { JwtModule } from '@nestjs/jwt';
 import { ConfigModule, ConfigService } from '@nestjs/config';
+import { MatchService } from 'src/match/match.service';
 
 @Module({
   imports: [
@@ -23,6 +24,6 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
     })
   ],
   controllers: [TournamentController],
-  providers: [TournamentService]
+  providers: [TournamentService, MatchService]
 })
 export class TournamentModule {}

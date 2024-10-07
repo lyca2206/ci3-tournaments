@@ -35,14 +35,14 @@ export class TournamentController {
 
     @UseGuards(AuthGuard('jwt'))
     @Post("/initSingleElimination/:id")
-    initializeSingleEliminationTournament() {
-        return this.tournamentService.initializeSingleEliminationTournament()
+    initializeSingleEliminationTournament(@Param("id") id: string) {
+        return this.tournamentService.initializeSingleEliminationTournament(id)
     }
 
     @UseGuards(AuthGuard('jwt'))
     @Post("/initRoundRobin/:id")
-    initializeRoundRobinTournament() {
-        return this.tournamentService.initializeSingleEliminationTournament()
+    initializeRoundRobinTournament(@Param("id") id: string) {
+        return this.tournamentService.initializeRoundRobinTournament(id)
     }
 
     @UseGuards(AuthGuard('jwt'))

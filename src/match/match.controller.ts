@@ -1,4 +1,4 @@
-import { Controller, Delete, Get, Post, Put, UseGuards } from '@nestjs/common';
+import { Controller, Delete, Get, Param, UseGuards } from '@nestjs/common';
 import { MatchService } from './match.service';
 import { AuthGuard } from '@nestjs/passport';
 
@@ -7,30 +7,21 @@ export class MatchController {
     constructor(
         private readonly matchService: MatchService
     ){}
+    @UseGuards(AuthGuard('jwt'))
+    @Get("/:id")
+    getMatchByID(@Param("id") id: string) {
+        return this.matchService.getMatchByID(id)
+    }
 
     @UseGuards(AuthGuard('jwt'))
-    @Post("/create")
-    createMatch() {
-        return this.matchService.createMatch()
-    }
-    
-    @Get("/:id")
-    getMatchByID() {
-        return this.matchService.getMatchByID()
-    }
-
     @Get("/getByTournamentID/:id")
-    getMatchByTournamentID() {
-        return this.matchService.getMatchByTournamentID()
+    getMatchByTournamentID(@Param("id") id: string) {
+        return this.matchService.getMatchByTournamentID(id)
     }
 
-    @Put("/:id")
-    updateMatch() {
-        return this.matchService.updateMatch()
-    }
-
+    @UseGuards(AuthGuard('jwt'))
     @Delete("/:id")
-    softDeleteMatch() {
-        return this.matchService.softDeleteMatch()
+    softDeleteMatch(@Param("id") id: string) {
+        return this.matchService.softDeleteMatch(id)
     }
 }
