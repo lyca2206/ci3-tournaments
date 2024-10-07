@@ -2,10 +2,9 @@
 
 ## By
 
-- Ariel Pabon
-- Jesus Garces
-- Juan Pabloo Acevedo
-
+- Ariel Pabón (Floof).
+- Jesús Garcés.
+- Juan Pablo Acevedo.
 
 Welcome to our awesome Tournament Management System! 🎉 This robust backend application is built with NestJS for managing epic tournaments. Create tournaments, generate brackets, and manage users with ease! 💪
 
