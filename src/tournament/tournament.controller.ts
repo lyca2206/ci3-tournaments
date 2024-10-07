@@ -53,7 +53,7 @@ export class TournamentController {
 
     @UseGuards(AuthGuard('jwt'))
     @Delete("/:id")
-    softDeleteTournament() {
-        return this.tournamentService.softDeleteTournament()
+    softDeleteTournament(@Param("id") id: string) {
+        return this.tournamentService.softDeleteTournament(id)
     }
 }

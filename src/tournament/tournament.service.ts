@@ -61,8 +61,13 @@ export class TournamentService {
         } catch (e) { this.handleException(e) }
     }
 
-    async softDeleteTournament() {
-        throw new NotImplementedException
+    async softDeleteTournament(id: string) {
+        const tournament = await this.tournamentRepository.findOne({ where: { id } })
+        if (!tournament) { throw new NotFoundException }
+
+        this.tournamentRepository.softDelete({ id })
+        
+        return tournament
     }
 
     private handleException(e: any) {
