@@ -24,7 +24,7 @@ Welcome to our awesome Tournament Management System! 🎉 This robust backend ap
 
 ### Prerequisites
 
-- Node.js (v14 or later) 📦
+- NestJS (v16 or later) 📦
 - Yarn package manager 🧶
 - Docker 🐳 and Docker Compose 🐙
 
