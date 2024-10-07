@@ -62,6 +62,7 @@ export class TournamentService {
     }
 
     async initializeRoundRobinTournament(id: string) {
+        //TODO. It inherently depends on Group, hence why I need to wait until that module is done.
         throw new NotImplementedException
     }
 
