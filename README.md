@@ -182,8 +182,7 @@ yarn run test:e2e
 # 📊 Test coverage
 yarn run test:cov
 
-```bash
-```
+``
 
 ## 📚 API Documentation
 
