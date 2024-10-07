@@ -1,4 +1,4 @@
-# Tournament Management System
+# 🏆 Tournament Management System
 
 ## By
 
@@ -6,26 +6,27 @@
 - Jesus Garces
 - Juan Pabloo Acevedo
 
-This project is a robust backend application built with NestJS for managing tournaments. It allows for the creation of tournaments, generation of brackets, and user management. The system is developed using TypeScript and utilizes PostgreSQL for data persistence, with the database running in Docker containers.
 
-## Features
+Welcome to our awesome Tournament Management System! 🎉 This robust backend application is built with NestJS for managing epic tournaments. Create tournaments, generate brackets, and manage users with ease! 💪
 
-- User authentication and authorization with JWT
-- Role-based access control
-- Tournament creation and management
-- Bracket generation
-- User registration for tournaments
-- Data persistence using PostgreSQL and TypeORM
-- Comprehensive test coverage
-- Dockerized database environment
+## ✨ Features
 
-## Project Setup
+- 🔐 User authentication and authorization with JWT
+- 👥 Role-based access control
+- 🏟️ Tournament creation and management
+- 🌳 Bracket generation
+- 📝 User registration for tournaments
+- 💾 Data persistence using PostgreSQL and TypeORM
+- 🧪 Comprehensive test coverage
+- 🐳 Dockerized database environment
+
+## 🚀 Project Setup
 
 ### Prerequisites
 
-- Node.js (v14 or later)
-- Yarn package manager
-- Docker and Docker Compose
+- Node.js (v14 or later) 📦
+- Yarn package manager 🧶
+- Docker 🐳 and Docker Compose 🐙
 
 ### Installation
 
@@ -72,41 +73,41 @@ This project is a robust backend application built with NestJS for managing tour
    JWT_EXPIRATION="8h"
    ```
 
-## Running the Application
+## 🏃‍♂️ Running the Application
 
 ```bash
-# Development mode
+# 🌱 Development mode
 yarn run start
 
-# Watch mode
+# 👀 Watch mode
 yarn run start:dev
 
-# Production mode
+# 🚀 Production mode
 yarn run start:prod
 ```
 
-## Testing
+## 🧪 Testing
 
 ```bash
-# Unit tests
+# 🔬 Unit tests
 yarn run test
 
-# E2E tests
+# 🌐 E2E tests
 yarn run test:e2e
 
-# Test coverage
+# 📊 Test coverage
 yarn run test:cov
 ```
 
-## API Documentation
+## 📚 API Documentation
 
-For detailed information about the API endpoints, their parameters, and responses, please refer to the `API_DOCUMENTATION.md` file in the project root.
+For detailed information about the API endpoints, their parameters, and responses, please refer to the `API_DOCUMENTATION.md` file in the project root. 📖
 
-## Authentication and Authorization
+## 🔐 Authentication and Authorization
 
-This system implements JWT-based authentication. Users can register, log in, and receive a token for accessing protected routes. The application supports multiple user roles with different permissions.
+This system implements JWT-based authentication. Users can register, log in, and receive a token for accessing protected routes. The application supports multiple user roles with different permissions. 🛡️
 
-## Database Seeding
+## 🌱 Database Seeding
 
 To populate the database with initial data for testing:
 
@@ -114,18 +115,43 @@ To populate the database with initial data for testing:
 yarn run seed
 ```
 
-This will create an admin user and some sample tournaments.
+This will create an admin user and some sample tournaments. 🎲
 
-## Deployment
+## 🚢 Deployment
 
-The application is configured for cloud deployment with automated testing and deployment pipelines. For more information on the deployment process, see `DEPLOYMENT.md`.
+The application is configured for cloud deployment with automated testing and deployment pipelines. For more information on the deployment process, see `DEPLOYMENT.md`. ☁️
 
-## Contributing
+## 🤝 Contributing
 
-Please read `CONTRIBUTING.md` for details on our code of conduct and the process for submitting pull requests.
+Please read `CONTRIBUTING.md` for details on our code of conduct and the process for submitting pull requests. We welcome your contributions! 🙌
 
-## License
+## 📄 License
 
-This project is licensed under the MIT License - see the `LICENSE.md` file for details.
+This project is licensed under the MIT License - see the `LICENSE.md` file for details. ⚖️
 
 ---
+
+## 🎮 Quick Start Guide
+
+1. 📥 Clone the repo
+2. 🔧 Install dependencies
+3. 🐳 Start Docker containers
+4. 🗄️ Set up the database
+5. ⚙️ Configure environment variables
+6. 🚀 Run the application
+7. 🏆 Start managing tournaments!
+
+---
+
+<p align="center">
+  <img src="https://your-image-url-here.com/tournament-logo.png" alt="Tournament Management System Logo" width="200"/>
+</p>
+
+<p align="center">
+  <a href="https://github.com/your-username/tournament-management-system/issues">Report Bug</a> ·
+  <a href="https://github.com/your-username/tournament-management-system/issues">Request Feature</a>
+</p>
+
+---
+
+Happy tournament managing! 🎉🏆🎊
