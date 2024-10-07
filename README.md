@@ -143,15 +143,4 @@ This project is licensed under the MIT License - see the `LICENSE.md` file for d
 
 ---
 
-<p align="center">
-  <img src="https://your-image-url-here.com/tournament-logo.png" alt="Tournament Management System Logo" width="200"/>
-</p>
-
-<p align="center">
-  <a href="https://github.com/your-username/tournament-management-system/issues">Report Bug</a> ·
-  <a href="https://github.com/your-username/tournament-management-system/issues">Request Feature</a>
-</p>
-
----
-
 Happy tournament managing! 🎉🏆🎊
