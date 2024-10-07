@@ -29,15 +29,21 @@ export class TournamentController {
 
     @UseGuards(AuthGuard('jwt'))
     @Get("/")
-    getAllTournaments() { return this.tournamentService.getAllTournaments() }
+    getAllTournaments() {
+        return this.tournamentService.getAllTournaments()
+    }
 
     @UseGuards(AuthGuard('jwt'))
     @Post("/initSingleElimination/:id")
-    initializeSingleEliminationTournament() { return this.tournamentService.initializeSingleEliminationTournament() }
+    initializeSingleEliminationTournament() {
+        return this.tournamentService.initializeSingleEliminationTournament()
+    }
 
     @UseGuards(AuthGuard('jwt'))
     @Post("/initRoundRobin/:id")
-    initializeRoundRobinTournament() { return this.tournamentService.initializeSingleEliminationTournament() }
+    initializeRoundRobinTournament() {
+        return this.tournamentService.initializeSingleEliminationTournament()
+    }
 
     @UseGuards(AuthGuard('jwt'))
     @Put("/:id")
@@ -47,5 +53,7 @@ export class TournamentController {
 
     @UseGuards(AuthGuard('jwt'))
     @Delete("/:id")
-    softDeleteTournament() { return this.tournamentService.softDeleteTournament() }
+    softDeleteTournament() {
+        return this.tournamentService.softDeleteTournament()
+    }
 }

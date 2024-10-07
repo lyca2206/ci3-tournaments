@@ -10,21 +10,31 @@ export class GroupController {
 
     @UseGuards(AuthGuard('jwt'))
     @Post("/create")
-    createGroup() { return this.groupService.createGroup() }
+    createGroup() {
+        return this.groupService.createGroup()
+    }
 
     @UseGuards(AuthGuard('jwt'))
     @Get("/:id")
-    getGroupByID() { return this.groupService.getGroupByID() }
+    getGroupByID() {
+        return this.groupService.getGroupByID()
+    }
     
     @UseGuards(AuthGuard('jwt'))
     @Get("/getByTournamentID/:id")
-    getGroupsByTournamentID() { return this.groupService.getGroupsByTournamentID() }
+    getGroupsByTournamentID() {
+        return this.groupService.getGroupsByTournamentID()
+    }
 
     @UseGuards(AuthGuard('jwt'))
     @Put("/:id")
-    updateGroup() { return this.groupService.updateGroup() }
+    updateGroup() {
+        return this.groupService.updateGroup()
+    }
 
     @UseGuards(AuthGuard('jwt'))
     @Delete("/:id")
-    softDeleteGroup() { return this.groupService.softDeleteGroup() }
+    softDeleteGroup() {
+        return this.groupService.softDeleteGroup()
+    }
 }

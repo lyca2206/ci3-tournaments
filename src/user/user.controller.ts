@@ -11,20 +11,30 @@ export class UserController {
     ){}
     
     @Post("/signup")
-    createUser(@Body() createUserDTO: CreateUserDTO) { return this.userService.createUser(createUserDTO) }
+    createUser(@Body() createUserDTO: CreateUserDTO) {
+        return this.userService.createUser(createUserDTO)
+    }
 
     @Post("/signin")
-    authenticate(@Body() userDTO: UserDTO) { return this.userService.authenticate(userDTO) }
+    authenticate(@Body() userDTO: UserDTO) {
+        return this.userService.authenticate(userDTO)
+    }
 
     @UseGuards(AuthGuard('jwt'))
     @Get('/:id')
-    getUserByID(@Param("id") id: string) { return this.userService.getUserByID(id) }
+    getUserByID(@Param("id") id: string) {
+        return this.userService.getUserByID(id)
+    }
 
     @UseGuards(AuthGuard('jwt'))
     @Put('/:id')
-    updateUser(@Param("id") id: string, @Body() userDTO: UserDTO) { return this.userService.updateUser(id, userDTO) }
+    updateUser(@Param("id") id: string, @Body() userDTO: UserDTO) {
+        return this.userService.updateUser(id, userDTO)
+    }
 
     @UseGuards(AuthGuard('jwt'))
     @Delete('/:id')
-    softDeleteUser(@Param("id") id: string) { return this.userService.softDeleteUser(id) }
+    softDeleteUser(@Param("id") id: string) {
+        return this.userService.softDeleteUser(id)
+    }
 }
