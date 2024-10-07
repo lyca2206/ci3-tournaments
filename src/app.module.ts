@@ -22,7 +22,8 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
         database: configService.get("DB_NAME"),
         entities: ['dist/**/*.entity{.ts, .js}'],
         autoLoadEntities: true,
-        synchronize: true
+        synchronize: true,
+        ssl: true
       })
     }),
     UserModule, GroupModule, TournamentModule, MatchModule],
