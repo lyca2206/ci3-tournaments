@@ -1,16 +1,23 @@
-import { BadRequestException, Injectable, NotFoundException, UnauthorizedException } from '@nestjs/common';
+import {
+  BadRequestException,
+  Injectable,
+  NotFoundException,
+  UnauthorizedException,
+} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Group } from './entities/group.entity';
 import { Repository } from 'typeorm';
 import { CreateGroupDto } from './DTO/create_group.dto';
-import {  UpdateGroupDto } from './DTO/update_group.dto';
+import { UpdateGroupDto } from './DTO/update_group.dto';
 import { Tournament } from 'src/tournament/entities/tournament.entity';
 
 @Injectable()
 export class GroupService {
   constructor(
-    @InjectRepository(Group) private readonly groupRepository: Repository<Group>,
-    @InjectRepository(Tournament) private readonly tournamentRepository: Repository<Tournament>,
+    @InjectRepository(Group)
+    private readonly groupRepository: Repository<Group>,
+    @InjectRepository(Tournament)
+    private readonly tournamentRepository: Repository<Tournament>,
   ) {}
 
   // Método para crear un grupo
@@ -18,9 +25,13 @@ export class GroupService {
     const { name, seeding, tournamentId } = createGroupDto;
 
     // Buscar el torneo relacionado
-    const tournament = await this.tournamentRepository.findOne({ where: { id: tournamentId } });
+    const tournament = await this.tournamentRepository.findOne({
+      where: { id: tournamentId },
+    });
     if (!tournament) {
-      throw new NotFoundException(`Tournament with ID ${tournamentId} not found`);
+      throw new NotFoundException(
+        `Tournament with ID ${tournamentId} not found`,
+      );
     }
 
     const newGroup = this.groupRepository.create({
@@ -36,18 +47,27 @@ export class GroupService {
   async getGroupByID(id: string) {
     try {
       const group = await this.groupRepository.findOne({ where: { id } });
-      if (!group) { throw new NotFoundException }
+      if (!group) {
+        throw new NotFoundException();
+      }
 
-      return group
-  } catch (e) { this.handleException(e) }
+      return group;
+    } catch (e) {
+      this.handleException(e);
+    }
   }
 
   // Método para obtener todos los grupos de un torneo específico
   async getGroupsByTournamentID(tournamentId: string): Promise<Group[]> {
-    const tournament = await this.tournamentRepository.findOne({ where: { id: tournamentId }, relations: ['groups'] });
-    
+    const tournament = await this.tournamentRepository.findOne({
+      where: { id: tournamentId },
+      relations: ['groups'],
+    });
+
     if (!tournament) {
-      throw new NotFoundException(`Tournament with ID ${tournamentId} not found`);
+      throw new NotFoundException(
+        `Tournament with ID ${tournamentId} not found`,
+      );
     }
 
     return tournament.groups;
@@ -55,27 +75,34 @@ export class GroupService {
 
   // Método para obtener todos los grupos de un torneo específico
   async getGroupBySeed(tournamentId: string, seeding: number): Promise<Group> {
-    const group = await this.groupRepository.findOne({ where: { seeding, tournament: { id: tournamentId } } });
-    
+    const group = await this.groupRepository.findOne({
+      where: { seeding, tournament: { id: tournamentId } },
+    });
+
     if (!group) {
-      throw new NotFoundException
+      throw new NotFoundException();
     }
 
-    return group
+    return group;
   }
 
   async getGroupCount(tournamentId: string): Promise<number> {
-    const count = await this.groupRepository.count({ where: { tournament: { id: tournamentId } } });
-    
+    const count = await this.groupRepository.count({
+      where: { tournament: { id: tournamentId } },
+    });
+
     if (!count) {
-      throw new NotFoundException
+      throw new NotFoundException();
     }
 
-    return count
+    return count;
   }
 
   // Método para actualizar un grupo
-  async updateGroup(id: string, updateGroupDto: UpdateGroupDto): Promise<Group> {
+  async updateGroup(
+    id: string,
+    updateGroupDto: UpdateGroupDto,
+  ): Promise<Group> {
     const group = await this.groupRepository.findOne({ where: { id } });
 
     if (!group) {
@@ -98,12 +125,16 @@ export class GroupService {
 
     await this.groupRepository.softDelete(id);
 
-    return group
+    return group;
   }
 
   private handleException(e: any) {
-    if (e.code === "23505") { throw new BadRequestException("The group is not found.") }
-    else if (e.code === "22P02") { throw new BadRequestException("The given ID isn't valid.") }
-    else { throw e }
+    if (e.code === '23505') {
+      throw new BadRequestException('The group is not found.');
+    } else if (e.code === '22P02') {
+      throw new BadRequestException("The given ID isn't valid.");
+    } else {
+      throw e;
+    }
   }
 }
