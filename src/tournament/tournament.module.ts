@@ -19,12 +19,12 @@ import { GroupService } from 'src/group/group.service';
       imports: [ConfigModule.forRoot()],
       inject: [ConfigService],
       useFactory: (configService: ConfigService) => ({
-        secret: configService.get("JWT_SECRET"),
-        signOptions: { expiresIn: configService.get("JWT_EXPIRATION") }
-      })
-    })
+        secret: configService.get('JWT_SECRET'),
+        signOptions: { expiresIn: configService.get('JWT_EXPIRATION') },
+      }),
+    }),
   ],
   controllers: [TournamentController],
-  providers: [TournamentService, MatchService, GroupService]
+  providers: [TournamentService, MatchService, GroupService],
 })
 export class TournamentModule {}
