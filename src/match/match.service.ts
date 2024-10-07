@@ -3,6 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Match } from './entities/match.entity';
 import { Repository } from 'typeorm';
 import { JwtService } from '@nestjs/jwt';
+import { Group } from 'src/group/entities/group.entity';
 
 @Injectable()
 export class MatchService {
@@ -33,10 +34,10 @@ export class MatchService {
 
     async getMatchByTournamentID(id: string) {
         try {
-            const match = await this.matchRepository.find({ where: { tournament: { id } } })
-            if (!match) { throw new NotFoundException }
+            const matches = await this.matchRepository.find({ where: { tournament: { id } } })
+            if (!matches) { throw new NotFoundException }
     
-            return match
+            return matches
         } catch (e) { this.handleException(e) }
     }
 
@@ -46,6 +47,17 @@ export class MatchService {
 
         this.matchRepository.softDelete({ id })
         
+        return match
+    }
+
+    async addGroup(id: string, group: Group) {
+        const match = await this.matchRepository.findOne({ where: { id } })
+        if (!match) { throw new NotFoundException }
+
+        if (match.groups !== undefined) { match.groups.push(group) }
+        
+        await this.matchRepository.save(match)
+
         return match
     }
 

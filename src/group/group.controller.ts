@@ -1,6 +1,8 @@
-import { Controller, Delete, Get, Post, Put, UseGuards } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Put, UseGuards } from '@nestjs/common';
 import { GroupService } from './group.service';
 import { AuthGuard } from '@nestjs/passport';
+import { CreateGroupDto } from './DTO/create_group.dto';
+import {  UpdateGroupDto } from './DTO/update_group.dto';
 
 @Controller('group')
 export class GroupController {
@@ -10,31 +12,31 @@ export class GroupController {
 
     @UseGuards(AuthGuard('jwt'))
     @Post("/create")
-    createGroup() {
-        return this.groupService.createGroup()
+    createGroup(@Body() createGroupDto: CreateGroupDto) {
+        return this.groupService.createGroup(createGroupDto);
     }
 
     @UseGuards(AuthGuard('jwt'))
     @Get("/:id")
-    getGroupByID() {
-        return this.groupService.getGroupByID()
+    getGroupByID(@Param('id') id: string) {
+        return this.groupService.getGroupByID(id);
     }
     
     @UseGuards(AuthGuard('jwt'))
     @Get("/getByTournamentID/:id")
-    getGroupsByTournamentID() {
-        return this.groupService.getGroupsByTournamentID()
+    getGroupsByTournamentID(@Param('id') tournamentId: string) {
+        return this.groupService.getGroupsByTournamentID(tournamentId);
     }
 
     @UseGuards(AuthGuard('jwt'))
     @Put("/:id")
-    updateGroup() {
-        return this.groupService.updateGroup()
+    updateGroup(@Param('id') id: string, @Body() updateGroupDto: UpdateGroupDto) {
+        return this.groupService.updateGroup(id, updateGroupDto);
     }
 
     @UseGuards(AuthGuard('jwt'))
     @Delete("/:id")
-    softDeleteGroup() {
-        return this.groupService.softDeleteGroup()
+    softDeleteGroup(@Param('id') id: string) {
+        return this.groupService.softDeleteGroup(id);
     }
 }

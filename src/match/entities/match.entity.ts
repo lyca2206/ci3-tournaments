@@ -1,6 +1,6 @@
 import { Group } from "src/group/entities/group.entity";
 import { Tournament } from "src/tournament/entities/tournament.entity";
-import { DeleteDateColumn, Entity, ManyToMany, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { DeleteDateColumn, Entity, JoinTable, ManyToMany, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity('match')
 export class Match {
@@ -20,6 +20,7 @@ export class Match {
     winnerGroup: Group
 
     @ManyToMany(() => Group, group => group.matches)
+    @JoinTable()
     groups: Group[]
 
     @DeleteDateColumn()
