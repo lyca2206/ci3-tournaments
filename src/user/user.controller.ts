@@ -12,6 +12,7 @@ import { CreateUserDTO } from './DTO/create_user.dto';
 import { UserDTO } from './DTO/user.dto';
 import { UserService } from './user.service';
 import { AuthGuard } from '@nestjs/passport';
+import { User } from './entities/user.entity';
 
 @Controller('user')
 export class UserController {
@@ -31,6 +32,12 @@ export class UserController {
   @Get('/:id')
   getUserByID(@Param('id') id: string) {
     return this.userService.getUserByID(id);
+  }
+
+  @UseGuards(AuthGuard('jwt'))
+  @Get()
+  async getAllUsers(): Promise<User[]> {
+    return this.userService.getAllUsers();
   }
 
   @UseGuards(AuthGuard('jwt'))

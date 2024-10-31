@@ -62,6 +62,22 @@ export class UserService {
     }
   }
 
+  async getAllUsers(): Promise<User[]> {
+    try {
+      const users = await this.userRepository.find({
+        select: {
+          id: true,
+          username: true,
+          deletedAt: true,
+        },
+      });
+      return users; // Asegúrate de que `users` sea del tipo User[]
+    } catch (e) {
+      this.handleException(e);
+      return []; // Retorna un array vacío si ocurre una excepción
+    }
+  }  
+
   async updateUser(id: string, createUserDTO: CreateUserDTO) {
     try {
       const { username, password } = createUserDTO;
