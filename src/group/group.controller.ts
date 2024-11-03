@@ -36,6 +36,12 @@ export class GroupController {
   }
 
   @UseGuards(AuthGuard('jwt'))
+  @Get('/')
+  getAllGroups() {
+    return this.groupService.getAllGroups();
+  }
+
+  @UseGuards(AuthGuard('jwt'))
   @Put('/:id')
   updateGroup(@Param('id') id: string, @Body() updateGroupDto: UpdateGroupDto) {
     return this.groupService.updateGroup(id, updateGroupDto);

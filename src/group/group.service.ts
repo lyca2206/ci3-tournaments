@@ -10,6 +10,7 @@ import { Repository } from 'typeorm';
 import { CreateGroupDto } from './DTO/create_group.dto';
 import { UpdateGroupDto } from './DTO/update_group.dto';
 import { Tournament } from 'src/tournament/entities/tournament.entity';
+import { promises } from 'dns';
 
 @Injectable()
 export class GroupService {
@@ -126,6 +127,10 @@ export class GroupService {
     await this.groupRepository.softDelete(id);
 
     return group;
+  }
+
+  async getAllGroups(): Promise<Group[]> {
+    return this.groupRepository.find();
   }
 
   private handleException(e: any) {
